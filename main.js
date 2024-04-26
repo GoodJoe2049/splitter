@@ -1,6 +1,6 @@
 
-var windowWidth = window.innerWidth;
-var windowHeight = window.innerHeight;
+var windowWidth;
+var windowHeight;
 
 addEventListener("resize", (event) => {});
 
@@ -15,4 +15,5 @@ const drawGameWindow = () => {
     document.getElementById("game-window-container").style.height = windowHeight + "px";
 };
 
+onresize();
 drawGameWindow();

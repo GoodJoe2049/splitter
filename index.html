@@ -9,26 +9,57 @@
   </head>
 
   <style>
-    #game-window-container {
-        min-width: 250px;
-        min-height: 450px;
-        max-width: 1000px;
-        max-height: 800px;
-        background-color: black;
+    #site-container {
+      justify-content: center;
+      display: flex;
     }
 
-    #site-container {
-        justify-content: center;
-        display: flex;
+    #game-window-container {
+      min-width: 250px;
+      min-height: 450px;
+      max-width: 1000px;
+      max-height: 800px;
+      display: flex;
+      flex-flow: column;
+      background-color: black;
+    }
+
+    #top-container {
+      background-color: white;
+      display: flex;
+      flex: 0 1 40px;
+    }
+
+    #game-area {
+      background-color: rgb(92, 92, 92);
+      height: auto;
+      display: flex;
+      flex: 1 1 auto;
+    }
+
+    #bottom-container {
+      background-color: rgb(101, 122, 219);
+      display: flex;
+      flex: 0 1 40px;
     }
   </style>
 
   <body style="background-color: rgb(100, 127, 131);">
     <div id="site-container">
-        <div id="game-window-container">
-            <script src="main.js"></script>
+      <div id="game-window-container">
+        <div id="top-container">
+
         </div>
+        <div id="game-area">
+          
+        </div>
+        <div id="bottom-container">
+
+        </div>
+      </div>
     </div>
   </body>
+    
+  <script src="main.js"></script>
 
 </html>
