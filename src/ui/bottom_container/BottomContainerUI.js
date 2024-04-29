@@ -1,15 +1,20 @@
 import State from "../../state.js";
+import { MAX_LIFE_BAR } from "../../state-constants.js";
 
 const updateLifeUi = () => {
+    updatePercentage();
+    updateLifeBar();
+};
+
+const updatePercentage = () => {
     let percent = State.getLifeBar().toString();
     document.getElementById("percent-whole-digits").innerHTML = percent.substring(percent.length - 2, 0);
     document.getElementById("percent-decimal-digits").innerHTML = percent.substring(percent.length, percent.length - 2);
-    
-    //then update healthbar
+};
+
+const updateLifeBar = () => {
     let lifeBar = document.getElementById("life-bar");
-    // let tempwidth = document.getElementById("life-bar").clientWidth; //redo this and put stuff in classes
-    // tempwidth = tempwidth - Math.round(0.01 * tempwidth);
-    // document.getElementById("life-bar").style.width = tempwidth + "px";
+    lifeBar.style.width = (State.getLifeBar() / MAX_LIFE_BAR) * 100 + "%";
 };
 
 const BottomContainerUI = {
