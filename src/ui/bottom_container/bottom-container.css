@@ -1,0 +1,45 @@
+
+#bottom-container {
+    background-color: rgb(31, 31, 31);
+    display: flex;
+    flex: 0 1 50px;
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+#life-percent {
+    color: rgb(16, 219, 255);
+    width: 100px;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    margin-right: 2px;
+}
+
+#percent-whole-digits {
+    font-size: 32px;
+}
+
+#percent-decimal-digits {
+    margin-top: 13px;
+    font-size: 18px;
+}
+
+#life-bar-container {
+    width: 100%;
+    padding: 10px;
+}
+
+#life-bar-border {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+#life-bar {
+    background-color: rgb(16, 219, 255);
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+}
