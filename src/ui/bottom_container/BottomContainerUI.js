@@ -1,9 +1,10 @@
 import State from "../../state.js";
 
 const updateLifeUi = () => {
-    let percent = State.getLifeBar();
-    document.getElementById("percent-whole-digits").innerHTML = percent.toString().substring(2,0); //needs dynamic check for less than 4 digits present
-    document.getElementById("percent-decimal-digits").innerHTML = percent.toString().substring(5,2);
+    let percent = State.getLifeBar().toString();
+    document.getElementById("percent-whole-digits").innerHTML = percent.substring(percent.length - 2, 0);
+    document.getElementById("percent-decimal-digits").innerHTML = percent.substring(percent.length, percent.length - 2);
+    
     //then update healthbar
     let lifeBar = document.getElementById("life-bar");
     // let tempwidth = document.getElementById("life-bar").clientWidth; //redo this and put stuff in classes

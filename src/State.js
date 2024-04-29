@@ -86,7 +86,7 @@ var heatLevel = 1;      //the difficulty level
 var totalEnergy = 0;    //energy generated through the entire run
 var lifeBar = MAX_LIFE_BAR;    //current energy to stay alive
 var tickIds = [];
-var tickDelayMs = 15;
+var tickDelayMs = 1;
 var paused = false;
 var tickPaused = false;
 
