@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "zwitterion": "^0.47.0"
+  },
+
+  "scripts": {
+    "build-static": "zwitterion --build-static"
+  }
+}
