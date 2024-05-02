@@ -18,7 +18,7 @@ const updateLifeBar = () => {
 };
 
 const BottomContainerUI = {
-    updateLifeUi
+    updateLifeUi,
 };
 
 export default BottomContainerUI;

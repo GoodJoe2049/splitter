@@ -1,2 +1,2 @@
 
-export const MAX_LIFE_BAR = 1000;
+export const MAX_LIFE_BAR = 10000;

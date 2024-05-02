@@ -1,18 +1,25 @@
 import Window from "./ui/Window.mjs";
 import State from "./State.mjs";
+import GameContainerUI from "./ui/game_container/GameContainerUI.mjs";
 
 addEventListener("resize", (event) => {});
 
 onresize = (event) => {
-    Window.updateSize(); //size not updating for some reason
-    drawGameWindow(); //move this to window too
+    Window.updateSize();
+    Window.drawGameWindow();
 };
 
-const drawGameWindow = () => {
-    document.getElementById("game-window-container").style.width = Window.getWidth() + "px";
-    document.getElementById("game-window-container").style.height = Window.getHeight() + "px";
-};
+let gameArea = document.getElementById("game-area");
+
+gameArea.addEventListener("click", GameContainerUI.playerClick);
+
+window.addEventListener("keydown", (e) => {
+    if (['z', 'x'].includes(e.key)) { //will make keybinds customizable later
+        GameContainerUI.playerClick();
+    } else if (e.key === ' ') {
+        State.toggleGamePaused();
+    }
+});
 
 onresize();
-drawGameWindow();
 State.startGame();

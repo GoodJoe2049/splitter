@@ -1,6 +1,8 @@
 
 const drawGameWindow = () => {
-
+    let gameContainer = document.getElementById("game-window-container");
+    gameContainer.style.width = windowWidth + "px";
+    gameContainer.style.height = windowHeight + "px";
 };
 
 const updateSize = () => {
@@ -28,7 +30,7 @@ const Window = {
     updateSize,
     getWidth,
     getHeight,
-    getSize
+    getSize,
 };
 
 export default Window;

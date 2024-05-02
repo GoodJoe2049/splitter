@@ -10,12 +10,13 @@
 
 #life-percent {
     color: rgb(16, 219, 255);
-    width: 100px;
+    width: 120px;
     font-style: italic;
     display: flex;
     justify-content: center;
     margin-top: 5px;
     margin-right: 2px;
+    margin-left: 4px;
 }
 
 #percent-whole-digits {

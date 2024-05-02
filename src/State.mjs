@@ -6,25 +6,22 @@ import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 const startGame = () => {
     startTick();
     //render the game screen
-
+    //start particle engine
+    //start audio level loop
 };
 
 const gameOver = () => {
     stopTick();
 };
 
-const pauseGame = () => {
-
-};
-
-const resumeGame = () => {
-
+const toggleGamePaused = () => {
+    gamePaused = !gamePaused; 
 };
 
 const startTick = () => {
     tickIds.push(
         setInterval(function() {
-            if (!tickPaused){
+            if (!gamePaused){
                 subLifeBarBy(getPassiveEnergyLoss());
             }
         }, tickDelayMs)
@@ -51,6 +48,10 @@ const increaseTotalEnergyBy = (positiveAmount) => {
 };
 
 const addLifeBarBy = (amount) => {
+    if (gamePaused) {
+        return;
+    }
+
     if (lifeBar + amount > MAX_LIFE_BAR) {
         lifeBar = MAX_LIFE_BAR;
     } else {
@@ -61,6 +62,10 @@ const addLifeBarBy = (amount) => {
 };
 
 const subLifeBarBy = (amount) => {
+    if (gamePaused) {
+        return;
+    }
+
     if (amount >= lifeBar) {
         lifeBar = 0;
         gameOver();
@@ -68,6 +73,10 @@ const subLifeBarBy = (amount) => {
         lifeBar -= amount;
     }
     BottomContainerUI.updateLifeUi();
+};
+
+const missParticlePenalty = () => {
+    subLifeBarBy(heatLevel * 100);
 };
 
 const getPassiveEnergyLoss = () => {
@@ -86,20 +95,22 @@ var heatLevel = 1;      //the difficulty level
 var totalEnergy = 0;    //energy generated through the entire run
 var lifeBar = MAX_LIFE_BAR;    //current energy to stay alive
 var tickIds = [];
-var tickDelayMs = 1;
-var paused = false;
+var tickDelayMs = 10;
+var gamePaused = false;
 var tickPaused = false;
 
 const State = {
     startGame,
     gameOver,
+    toggleGamePaused,
     getHeatLevel,
     raiseHeatLevel,
     getTotalEnergy,
     getLifeBar,
     addLifeBarBy,
     subLifeBarBy,
-    getPassiveEnergyLoss
+    missParticlePenalty,
+    getPassiveEnergyLoss,
 };
 
 export default State;
