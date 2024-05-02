@@ -1,5 +1,5 @@
-import Window from "./ui/window.js";
-import State from "./state.js";
+import Window from "./ui/Window.mjs";
+import State from "./State.mjs";
 
 addEventListener("resize", (event) => {});
 

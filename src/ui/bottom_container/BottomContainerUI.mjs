@@ -1,5 +1,5 @@
-import State from "../../state.js";
-import { MAX_LIFE_BAR } from "../../state-constants.js";
+import State from "../../State.mjs";
+import { MAX_LIFE_BAR } from "../../state-constants.mjs";
 
 const updateLifeUi = () => {
     updatePercentage();

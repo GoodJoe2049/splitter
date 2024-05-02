@@ -1,7 +1,7 @@
 import {
     MAX_LIFE_BAR,
-} from "./state-constants.js";
-import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.js";
+} from "./state-constants.mjs";
+import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 
 const startGame = () => {
     startTick();
