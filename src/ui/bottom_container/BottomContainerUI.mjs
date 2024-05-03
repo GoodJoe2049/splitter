@@ -1,7 +1,7 @@
 import State from "../../State.mjs";
 import { MAX_LIFE_BAR } from "../../state-constants.mjs";
 
-const updateLifeUi = () => {
+const updateLifePercentAndBar = () => {
     updatePercentage();
     updateLifeBar();
 };
@@ -18,7 +18,7 @@ const updateLifeBar = () => {
 };
 
 const BottomContainerUI = {
-    updateLifeUi,
+    updateLifePercentAndBar,
 };
 
 export default BottomContainerUI;

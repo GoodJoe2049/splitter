@@ -2,6 +2,48 @@
 #top-container {
     background-color: rgb(31, 31, 31);
     display: flex;
+    justify-content: space-between;
     flex: 0 1 50px;
     border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+#total-energy-container {
+    min-width: 120px;
+    width: fit-content;
+    max-width: 50%;
+    margin-left: 6px;
+    margin-top: 10px;
+    color: rgb(16, 219, 255);
+    font-weight: lighter;
+    font-size: 24px;
+}
+
+#heat-bar-container {
+    width: auto;
+    padding: 10px;
+    max-width: 50%;
+    width: 50%;
+    height: 20px;
+}
+
+#heat-bar-border {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+#heat-bar {
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+}
+
+#heat-level-container {
+    display: flex;
+    min-width: 120px;
+    margin-right: 6px;
+    margin-top: 10px;
+    color: bisque;
+    float: right;
 }

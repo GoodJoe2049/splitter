@@ -2,10 +2,16 @@ import {
     MAX_LIFE_BAR,
 } from "./state-constants.mjs";
 import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
+import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
 
 const startGame = () => {
     startTick();
-    //render the game screen
+    //render the game screen:
+    // bottom
+    // game
+    TopContainerUI.initRender();
+    
+    // set all values (life bar, heat level, etc.)
     //start particle engine
     //start audio level loop
 };
@@ -36,6 +42,7 @@ const stopTick = () => {
 
 const raiseHeatLevel = () => {
     heatLevel++;
+    TopContainerUI.updateHeatLevel();
     // if heat level at a certain place:
     // pause ticks
     // activate loading screen for next heat level
@@ -57,8 +64,9 @@ const addLifeBarBy = (amount) => {
     } else {
         lifeBar += amount;
     }
-    BottomContainerUI.updateLifeUi();
+    BottomContainerUI.updateLifePercentAndBar();
     increaseTotalEnergyBy(amount);
+    TopContainerUI.updateTotalEnergy();
 };
 
 const subLifeBarBy = (amount) => {
@@ -72,7 +80,7 @@ const subLifeBarBy = (amount) => {
     } else {
         lifeBar -= amount;
     }
-    BottomContainerUI.updateLifeUi();
+    BottomContainerUI.updateLifePercentAndBar();
 };
 
 const missParticlePenalty = () => {
