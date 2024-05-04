@@ -7,7 +7,7 @@ const initRender = () => {
 };
 
 const updateTotalEnergy = () => {
-    document.getElementById("total-energy-container").innerHTML = "123456789101112" + " E";
+    document.getElementById("total-energy-container").innerHTML = "1234567891011121314151617";
 };
 
 const updateHeatBar = () => {
@@ -15,7 +15,7 @@ const updateHeatBar = () => {
 };
 
 const updateHeatLevel = () => {
-    document.getElementById("heat-level-container").innerHTML = "Heat " + State.getHeatLevel();
+    document.getElementById("heat-level-container").innerHTML = "HEAT " + State.getHeatLevel();
 };
 
 const TopContainerUI = {
