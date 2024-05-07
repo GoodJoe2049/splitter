@@ -1,5 +1,6 @@
 import {
     MAX_LIFE_BAR,
+    STARTING_TICK_DELAY,
 } from "./state-constants.mjs";
 import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
@@ -99,11 +100,10 @@ const getLifeBar = () => lifeBar;
 
 
 var heatLevel = 1;      //the difficulty level
-//var passive energy loss?
 var totalEnergy = 0;    //energy generated through the entire run
 var lifeBar = MAX_LIFE_BAR;    //current energy to stay alive
 var tickIds = [];
-var tickDelayMs = 10;
+var tickDelayMs = STARTING_TICK_DELAY;
 var gamePaused = false;
 var tickPaused = false;
 
