@@ -7,7 +7,7 @@ const initRender = () => {
 };
 
 const updateTotalEnergy = () => {
-    document.getElementById("total-energy-container").innerHTML = "1234567891011121314151617";
+    document.getElementById("total-energy-container").innerHTML = State.getTotalEnergy();
 };
 
 const updateHeatBar = () => {

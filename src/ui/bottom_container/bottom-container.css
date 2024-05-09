@@ -31,18 +31,21 @@
 #life-bar-container {
     width: 100%;
     padding: 10px;
+    margin-bottom: 4px;
+    margin-right: 2px;
 }
 
 #life-bar-border {
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    padding: 2px;
     border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
 }
 
 #life-bar {
     background-color: rgb(16, 219, 255);
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    border-radius: 2px;
 }
