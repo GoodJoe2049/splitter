@@ -48,3 +48,16 @@
     height: 100%;
     border-radius: 2px;
 }
+
+#pause-button-container {
+    padding: 4px;
+}
+
+#pause-button-container:hover {
+    cursor: pointer;
+}
+
+#pause-button {
+    font-size: 32px;
+    background-color: white;
+}

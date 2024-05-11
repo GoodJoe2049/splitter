@@ -1,6 +1,6 @@
 import {
     MAX_LIFE_BAR,
-    STARTING_TICK_DELAY,
+    INITIAL,
 } from "./state-constants.mjs";
 import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
@@ -22,7 +22,8 @@ const gameOver = () => {
 };
 
 const toggleGamePaused = () => {
-    gamePaused = !gamePaused; 
+    BottomContainerUI.togglePauseButton();
+    gamePaused = !gamePaused;
 };
 
 const startTick = () => {
@@ -98,14 +99,15 @@ const getTotalEnergy = () => totalEnergy;
 
 const getLifeBar = () => lifeBar;
 
+const getGamePaused = () => gamePaused;
 
-var heatLevel = 1;      //the difficulty level
-var totalEnergy = 0;    //energy generated through the entire run
-var lifeBar = MAX_LIFE_BAR;    //current energy to stay alive
+
+var heatLevel = INITIAL.HEAT_LEVEL;
+var totalEnergy = INITIAL.TOTAL_ENERGY;
+var lifeBar = MAX_LIFE_BAR;
 var tickIds = [];
-var tickDelayMs = STARTING_TICK_DELAY;
+var tickDelayMs = INITIAL.TICK_DELAY;
 var gamePaused = false;
-var tickPaused = false;
 
 const State = {
     startGame,
@@ -119,6 +121,7 @@ const State = {
     subLifeBarBy,
     missParticlePenalty,
     getPassiveEnergyLoss,
+    getGamePaused
 };
 
 export default State;

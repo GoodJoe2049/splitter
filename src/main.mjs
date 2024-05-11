@@ -10,7 +10,6 @@ onresize = (event) => {
 };
 
 let gameArea = document.getElementById("game-area");
-
 gameArea.addEventListener("click", GameContainerUI.playerClick);
 
 window.addEventListener("keydown", (e) => {
@@ -20,6 +19,8 @@ window.addEventListener("keydown", (e) => {
         State.toggleGamePaused();
     }
 });
+
+document.getElementById("pause-button-container").addEventListener("click", State.toggleGamePaused);
 
 onresize();
 State.startGame();

@@ -10,7 +10,7 @@
 
 #game-window-container {
     min-width: 250px;
-    min-height: 450px;
+    min-height: 350px;
     max-width: 1000px;
     max-height: 800px;
     display: flex;

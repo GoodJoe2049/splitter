@@ -17,8 +17,13 @@ const updateLifeBar = () => {
     lifeBar.style.width = (State.getLifeBar() / MAX_LIFE_BAR) * 100 + "%";
 };
 
+const togglePauseButton = () => {
+    document.getElementById("pause-button").innerHTML = State.getGamePaused() ? "\u{23F8}" : "\u{25B8}"; //gonna change these to renders, not emojis
+};
+
 const BottomContainerUI = {
     updateLifePercentAndBar,
+    togglePauseButton
 };
 
 export default BottomContainerUI;
