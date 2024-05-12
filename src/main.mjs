@@ -9,8 +9,8 @@ onresize = (event) => {
     Window.drawGameWindow();
 };
 
-let gameArea = document.getElementById("game-area");
-gameArea.addEventListener("click", GameContainerUI.playerClick);
+let gameCanvas = document.querySelector("canvas");
+gameCanvas.addEventListener("click", GameContainerUI.playerClick);
 
 window.addEventListener("keydown", (e) => {
     if (['z', 'x'].includes(e.key)) { //will make keybinds customizable later
