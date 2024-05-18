@@ -6,8 +6,13 @@ const playerClick = () => {
     //otherwise remove the respective amount of points (missed clicks reduce points, penalty increasing with heat)
 };
 
+const drawParticles = () => {
+
+};
+
 const GameContainerUI = {
     playerClick,
+    drawParticles
 };
 
 export default GameContainerUI;

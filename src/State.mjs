@@ -4,6 +4,7 @@ import {
 } from "./state-constants.mjs";
 import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
+import Particles from "./particle_engine/Particles.mjs";
 
 const startGame = () => {
     startTick();
@@ -15,10 +16,17 @@ const startGame = () => {
     // set all values (life bar, heat level, etc.)
     //start particle engine
     //start audio level loop
+
+    //temp
+    Particles.addParticle();
+    Particles.loop();
 };
 
 const gameOver = () => {
     stopTick();
+    //store results in local storage
+    //display results
+    //clear results
 };
 
 const toggleGamePaused = () => {

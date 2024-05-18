@@ -9,7 +9,7 @@ onresize = (event) => {
     Window.drawGameWindow();
 };
 
-let gameCanvas = document.querySelector("canvas");
+let gameCanvas = document.getElementById("game-canvas");
 gameCanvas.addEventListener("click", GameContainerUI.playerClick);
 
 window.addEventListener("keydown", (e) => {
@@ -22,5 +22,5 @@ window.addEventListener("keydown", (e) => {
 
 document.getElementById("pause-button-container").addEventListener("click", State.toggleGamePaused);
 
-onresize();
+onresize(); //bug where canvas min size on first load, will likely not be an issue once menu is added
 State.startGame();
