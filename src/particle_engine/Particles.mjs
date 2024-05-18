@@ -1,3 +1,4 @@
+import State from "../State.mjs";
 import Particle from "./Particle.mjs";
 
 const context = document.getElementById("game-canvas").getContext("2d");
@@ -14,11 +15,13 @@ const removeParticle = () => {
 };
 
 const loop = () => {
-    context.fillStyle = window.getComputedStyle(gameArea).getPropertyValue('background-color');
-    context.fillRect(0, 0, gameArea.clientWidth, gameArea.clientHeight);
-    for (const p of particles) {
-        p.draw();
-        p.update();
+    if (!State.getGamePaused()) {
+        context.fillStyle = window.getComputedStyle(gameArea).getPropertyValue('background-color');
+        context.fillRect(0, 0, gameArea.clientWidth, gameArea.clientHeight);
+        for (const p of particles) {
+            p.draw();
+            p.update();
+        }
     }
     requestAnimationFrame(loop);
 };

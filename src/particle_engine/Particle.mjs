@@ -27,6 +27,7 @@ export default class Particle {
         //temp code for test
         this.x++;
         this.y++;
+        //gonna have to normalize this for different resolutions (use percentage)
     }
 
     getRgbString() {
