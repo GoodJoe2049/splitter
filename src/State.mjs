@@ -7,6 +7,11 @@ import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
 import Particles from "./particle_engine/Particles.mjs";
 
 const startGame = () => {
+    if (gameStarted) {
+        return
+    }
+
+    gameStarted = true;
     startTick();
     //render the game screen:
     // bottom
@@ -23,6 +28,7 @@ const startGame = () => {
 };
 
 const gameOver = () => {
+    gameStarted = false;
     stopTick();
     //store results in local storage
     //display results
@@ -30,6 +36,9 @@ const gameOver = () => {
 };
 
 const toggleGamePaused = () => {
+    if (!gameStarted) {
+        return
+    }
     BottomContainerUI.togglePauseButton();
     gamePaused = !gamePaused;
 };
@@ -116,6 +125,7 @@ var lifeBar = MAX_LIFE_BAR;
 var tickIds = [];
 var tickDelayMs = INITIAL.TICK_DELAY;
 var gamePaused = false;
+var gameStarted = false;
 
 const State = {
     startGame,

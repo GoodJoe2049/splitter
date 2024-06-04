@@ -5,13 +5,18 @@ const context = document.getElementById("game-canvas").getContext("2d");
 const gameArea = document.getElementById("game-area");
 
 const addParticle = () => {
-    //temp
-    particles.push(new Particle(20, 20, 20, 10));
-    particles.push(new Particle(40, 20, 10, 10));
+    particles.push(new Particle());
 };
 
-const removeParticle = () => {
-
+const playerClick = (cursorPosition) => {
+    //this will handle whether a particle(s) are clicked on to add the respective points
+    //otherwise remove the respective amount of points (missed clicks reduce points, penalty increasing with heat)
+    console.log(cursorPosition);
+    for (const p of particles) {
+        // if p is in the area of the click, remove it and get the energy +/-
+    
+        State.addLifeBarBy(55); //example to remove
+    }
 };
 
 const loop = () => {
@@ -32,7 +37,7 @@ const getParticles = () => particles;
 
 const Particles = {
     addParticle,
-    removeParticle,
+    playerClick,
     loop,
     getParticles
 };
