@@ -43,6 +43,9 @@ function startGame() {
 }
 
 function playerClick(event) {
+    if (State.getGamePaused() || !State.getGameStarted()) {
+        return;
+    }
     if (event.clientX) {
         Particles.playerClick({
             x: event.clientX - rect.left,

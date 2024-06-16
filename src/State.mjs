@@ -23,7 +23,7 @@ const startGame = () => {
     //start audio level loop
 
     //temp
-    Particles.addParticle();
+    Particles.addParticle(1000);
     Particles.loop();
 };
 
@@ -59,6 +59,10 @@ const stopTick = () => {
     });
 };
 
+const particleSpawner = () => {
+
+};
+
 const raiseHeatLevel = () => {
     heatLevel++;
     TopContainerUI.updateHeatLevel();
@@ -73,8 +77,13 @@ const increaseTotalEnergyBy = (positiveAmount) => {
     totalEnergy += positiveAmount;
 };
 
-const addLifeBarBy = (amount) => {
+const modifyLifeBarBy = (amount) => {
     if (gamePaused) {
+        return;
+    }
+
+    if (amount < 0) {
+        subLifeBarBy(amount);
         return;
     }
 
@@ -88,26 +97,22 @@ const addLifeBarBy = (amount) => {
     TopContainerUI.updateTotalEnergy();
 };
 
-const subLifeBarBy = (amount) => {
-    if (gamePaused) {
-        return;
-    }
-
-    if (amount >= lifeBar) {
+const subLifeBarBy = (negativeAmount) => {
+    if (-negativeAmount >= lifeBar) {
         lifeBar = 0;
         gameOver();
     } else {
-        lifeBar -= amount;
+        lifeBar += negativeAmount;
     }
     BottomContainerUI.updateLifePercentAndBar();
 };
 
 const missParticlePenalty = () => {
-    subLifeBarBy(heatLevel * 100);
+    subLifeBarBy(-heatLevel * 100);
 };
 
 const getPassiveEnergyLoss = () => {
-    return heatLevel; //this is gonna be different
+    return -heatLevel; //this is gonna be different
 };
 
 const getHeatLevel = () => heatLevel;
@@ -118,6 +123,8 @@ const getLifeBar = () => lifeBar;
 
 const getGamePaused = () => gamePaused;
 
+const getGameStarted = () => gameStarted;
+
 
 var heatLevel = INITIAL.HEAT_LEVEL;
 var totalEnergy = INITIAL.TOTAL_ENERGY;
@@ -126,6 +133,8 @@ var tickIds = [];
 var tickDelayMs = INITIAL.TICK_DELAY;
 var gamePaused = false;
 var gameStarted = false;
+var maxSystemEnergy;
+var actualSystemEnergy;
 
 const State = {
     startGame,
@@ -135,11 +144,11 @@ const State = {
     raiseHeatLevel,
     getTotalEnergy,
     getLifeBar,
-    addLifeBarBy,
-    subLifeBarBy,
+    modifyLifeBarBy,
     missParticlePenalty,
     getPassiveEnergyLoss,
-    getGamePaused
+    getGamePaused,
+    getGameStarted
 };
 
 export default State;

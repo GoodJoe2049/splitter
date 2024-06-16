@@ -3,6 +3,10 @@
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+body {
+    cursor: url('src/assets/images/cursor.svg'), auto;
+}
+
 #site-container {
     justify-content: center;
     display: flex;
