@@ -10,27 +10,33 @@ const addParticle = (energy) => {
 
 const playerClick = (cursorPosition) => {
     let applyPenalty = true;
-    for (const p of particles) {
-        if (particleIntersectsClick(p, cursorPosition)) {
+    let addParticlesAfterClick = [];
+    let pIndex = 0;
+    while (pIndex < particles.length) {
+        if (particleIntersectsClick(particles[pIndex], cursorPosition)) {
             // if p is in the area of the click, remove it and get the energy +/-
             applyPenalty = false;
 
-            State.modifyLifeBarBy(p.energy);
-            if (p.energy < 0) {
-                //anti particle, don't perform a split
-            } else if ('particle big enough') {
-                //normal particle, perform split if particle big enough
-                addParticle(100);
-                addParticle(100);
+            State.modifyLifeBarBy(particles[pIndex].energy);
+            if (particles[pIndex].energy > 0 && particles[pIndex].radius > 0) {
+                //store the locations to generate in proper place
+                addParticlesAfterClick.push(new Particle(100));
+                addParticlesAfterClick.push(new Particle(100));
             }
 
-            particles.splice(particles.indexOf(p), 1);
-            console.log(particles)
+            particles.splice(pIndex, 1);
+        } else {
+            pIndex++;
         }
     }
     if (applyPenalty) {
         State.missParticlePenalty();
+    } else {
+        for (const p of addParticlesAfterClick) {
+            particles.push(p);
+        }
     }
+    console.log(particles);
 };
 
 const loop = () => {
@@ -49,7 +55,7 @@ const particleIntersectsClick = (particle, cursorPosition) => {
     const distance = Math.sqrt(
         Math.pow(particle.getPositionX() - cursorPosition.x, 2) + Math.pow(particle.getPositionY() - cursorPosition.y, 2)
     );
-    return distance < particle.size;
+    return distance < particle.radius;
 };
 
 const particles = [];

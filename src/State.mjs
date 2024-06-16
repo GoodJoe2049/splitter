@@ -23,7 +23,7 @@ const startGame = () => {
     //start audio level loop
 
     //temp
-    Particles.addParticle(1000);
+    Particles.addParticle(100);
     Particles.loop();
 };
 

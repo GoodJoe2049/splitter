@@ -42,6 +42,8 @@ function startGame() {
     State.startGame();
 }
 
+startGame();//temp
+
 function playerClick(event) {
     if (State.getGamePaused() || !State.getGameStarted()) {
         return;
