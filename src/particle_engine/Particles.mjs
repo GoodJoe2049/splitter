@@ -13,15 +13,17 @@ const playerClick = (cursorPosition) => {
     let addParticlesAfterClick = [];
     let pIndex = 0;
     while (pIndex < particles.length) {
-        if (particleIntersectsClick(particles[pIndex], cursorPosition)) {
+        let currentParticle = particles[pIndex];
+
+        if (particleIntersectsClick(currentParticle, cursorPosition)) {
             // if p is in the area of the click, remove it and get the energy +/-
             applyPenalty = false;
 
-            State.modifyLifeBarBy(particles[pIndex].energy);
-            if (particles[pIndex].energy > 0 && particles[pIndex].radius > 0) {
-                //store the locations to generate in proper place
-                addParticlesAfterClick.push(new Particle(100));
-                addParticlesAfterClick.push(new Particle(100));
+            State.modifyLifeBarBy(currentParticle.energy);
+            if (currentParticle.energy > 0 && currentParticle.radius > 0) {
+                const newParticlesPosition = {x: currentParticle.getPositionX(), y: currentParticle.getPositionY()};
+                addParticlesAfterClick.push(new Particle(Math.round(currentParticle.energy / 2), newParticlesPosition));
+                addParticlesAfterClick.push(new Particle(Math.round(currentParticle.energy / 2), newParticlesPosition));
             }
 
             particles.splice(pIndex, 1);
@@ -40,12 +42,14 @@ const playerClick = (cursorPosition) => {
 };
 
 const loop = () => {
-    if (!State.getGamePaused()) {
+    if (!State.getGamePaused() && State.getGameStarted()) {
         context.fillStyle = window.getComputedStyle(gameArea).getPropertyValue('background-color');
         context.fillRect(0, 0, gameArea.clientWidth, gameArea.clientHeight);
         for (const p of particles) {
             p.draw();
-            p.update();
+            if (p.update() && p.energy < 0) {
+                particles.splice(particles.indexOf(p), 1);
+            }
         }
     }
     requestAnimationFrame(loop);

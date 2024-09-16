@@ -5,14 +5,16 @@ import {
 import BottomContainerUI from "./ui/bottom_container/BottomContainerUI.mjs";
 import TopContainerUI from "./ui/top_container/TopContainerUI.mjs";
 import Particles from "./particle_engine/Particles.mjs";
+import MusicEngine from "./audio_engine/MusicEngine.mjs";
 
 const startGame = () => {
     if (gameStarted) {
-        return
+        return;
     }
 
     gameStarted = true;
     startTick();
+    MusicEngine.start();
     //render the game screen:
     // bottom
     // game
@@ -24,6 +26,7 @@ const startGame = () => {
 
     //temp
     Particles.addParticle(100);
+    //Particles.addParticle(-100); adding antiparticle like this
     Particles.loop();
 };
 
@@ -37,7 +40,7 @@ const gameOver = () => {
 
 const toggleGamePaused = () => {
     if (!gameStarted) {
-        return
+        return;
     }
     BottomContainerUI.togglePauseButton();
     gamePaused = !gamePaused;

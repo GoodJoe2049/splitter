@@ -1,19 +1,21 @@
-import { randomIntBetween } from "../utils.mjs";
+import { coinflip, randomFloatBetween, randomIntBetween } from "../utils.mjs";
 import State from "../State.mjs";
+import { PARTICLE_SIZE } from "./particle-constants.mjs";
+import Particles from "./Particles.mjs";
 
 const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext("2d");
 
 export default class Particle {
     constructor(energy, position = {}) {
-        this.radius = generateRadius(); //normalize size relative to the smallest dimension (width v height) and randomize
+        this.radius = generateRadius(energy);
+        this.motion = generateMotionEquation();
         this.position = position;
         if (!Object.keys(position).length) {
             this.setRandomSpawnPosition();
         }
         this.color = generateRgbString(energy < 0);
         this.energy = energy;
-        this.motion = 'movement object with random motion equation and speed';
     }
 
     draw() {
@@ -24,13 +26,14 @@ export default class Particle {
     }
 
     update() {
-        //temp code for test, make a movement object to handle movement equation/pattern and speed (also percentage)
+        //temp code for test, mazzke a movement object to handle movement equation/pattern and speed (also percentage)
         //gonna have to normalize this for different resolutions (use percentage)
-        this.position.x = this.position.x + 0.7;
-        this.position.y = this.position.y + 0.7;
+        this.updatePosition();
 
         if (this.isOutOfBounds()) {
+            this.motion = generateMotionEquation();
             this.setRandomSpawnPosition();
+            return true;
         }
     }
 
@@ -38,7 +41,17 @@ export default class Particle {
         //set random spawn where particle will enter the screen
         //this is used when first generating particle and when particle goes out of bounds and needs to be reintroduced
         //if anti particle, then delete particle once out of bounds
-        this.position = {x: 0, y: 0};
+        if (coinflip()) {
+            this.position = {
+                x: randomIntBetween(0, canvas.width),
+                y: coinflip() ? 0 : canvas.height
+            };
+        } else {
+            this.position = {
+                x: coinflip() ? 0 : canvas.width,
+                y: randomIntBetween(0, canvas.height)
+            };
+        }
     }
 
     isOutOfBounds() {
@@ -49,20 +62,31 @@ export default class Particle {
             || this.getPositionY() + this.radius > canvas.height + diameter;
     }
 
+    updatePosition() {
+        this.position = {
+            x: this.position.x + this.motion.directionX * (this.motion.speed + generateJitter()),
+            y: this.position.y + this.motion.directionY * (this.motion.speed + generateJitter())
+        };
+    }
+
     getPositionX = () => this.position.x;
 
     getPositionY = () => this.position.y;
 }
 
-function generateRadius() {
+function generateRadius(energy) { //this has to change
     const smallestEdge = canvas.width < canvas.height ? canvas.width : canvas.height;
-    const lowBound = smallestEdge * 0.05;
+    let lowBound = smallestEdge * 0.05;
+    if (lowBound < PARTICLE_SIZE.MINIMUM) {
+        lowBound = PARTICLE_SIZE.MINIMUM;
+    }
     const highBound = lowBound + State.getHeatLevel() > smallestEdge / 2 ? smallestEdge / 2 : lowBound + State.getHeatLevel();
-    return randomIntBetween(lowBound, highBound);
+    return randomIntBetween(lowBound, highBound + energy);
 }
 
 function generateSpeed() {
     //State.getHeatLevel() < 50 : 
+    return randomFloatBetween(0.3, 1.5);
 }
 
 function generateRgbString(antiParticle) {
@@ -74,4 +98,18 @@ function generateRgbString(antiParticle) {
             ${antiParticle ? 1 : randomIntBetween(60, 85) / 100}
         )
     `;
+}
+
+function generateMotionEquation() {
+    return {
+        directionX: coinflip() ? 1 : -1,
+        directionY: coinflip() ? 1 : -1,
+        speed: generateSpeed(),
+        scale: randomFloatBetween(1, 10)
+    }
+}
+
+function generateJitter() {
+    //the more particles on screen, the more jitter
+    return randomFloatBetween(0, Math.min(Particles.getParticles().length / 50, 5));
 }
