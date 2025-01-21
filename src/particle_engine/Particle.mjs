@@ -37,18 +37,19 @@ export default class Particle {
         }
     }
 
-    setRandomSpawnPosition() {
+    setRandomSpawnPosition() { //fix spawn when motion is inadequate (or make motion after spawn)
+        //spawn away from click when splitting to avoid spam splitting (and breaking the game)
         //set random spawn where particle will enter the screen
         //this is used when first generating particle and when particle goes out of bounds and needs to be reintroduced
         //if anti particle, then delete particle once out of bounds
         if (coinflip()) {
             this.position = {
                 x: randomIntBetween(0, canvas.width),
-                y: coinflip() ? 0 : canvas.height
+                y: coinflip() ? 0 - this.radius : canvas.height + this.radius
             };
         } else {
             this.position = {
-                x: coinflip() ? 0 : canvas.width,
+                x: coinflip() ? 0 - this.radius : canvas.width + this.radius,
                 y: randomIntBetween(0, canvas.height)
             };
         }
@@ -74,7 +75,7 @@ export default class Particle {
     getPositionY = () => this.position.y;
 }
 
-function generateRadius(energy) { //this has to change
+function generateRadius(energy) { //this has to change to use percentage
     const smallestEdge = canvas.width < canvas.height ? canvas.width : canvas.height;
     let lowBound = smallestEdge * 0.05;
     if (lowBound < PARTICLE_SIZE.MINIMUM) {
